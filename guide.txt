@@ -1,0 +1,3 @@
+build datasets
+- build_datasets.py ../datasets/web/all
+
