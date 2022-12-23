@@ -39,7 +39,7 @@ def run(input_path, output_path, is_memory_intensive=False, pretrained_model=Non
 
         generator = Generator.data_generator(voc, gui_paths, img_paths, batch_size=BATCH_SIZE, generate_binary_sequences=True)
 
-    model = pix2code(input_shape, output_size, output_path)
+    model = ai_code(input_shape, output_size, output_path)
 
     if pretrained_model is not None:
         model.model.load_weights(pretrained_model)
@@ -47,7 +47,7 @@ def run(input_path, output_path, is_memory_intensive=False, pretrained_model=Non
     if not is_memory_intensive:
         model.fit(dataset.input_images, dataset.partial_sequences, dataset.next_words)
     else:
-        model.fit(generator, steps_per_epoch=steps_per_epoch)
+        model.fit_generator(generator, steps_per_epoch=steps_per_epoch)
 
 if __name__ == "__main__":
     argv = sys.argv[1:]
